@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+  <h1 id="title">Terros pispasiu apklausa</h1>
+  <link rel="stylesheet" href="styles.css">
+  <p id="description">Norite savanoriauti "terra.incognitus" ? (N-12)</p>
+  <fieldset>
+  <form id="survey-form">
+    <label id="name-label"> Pilnas vardas: <input id="name" type="text" placeholder="Įveskite savo vardą" required/></label>
+    <label id="email-label"> El. paštas: <input id="email" type="email" placeholder="Įveskite savo el. paštą" required></label>
+    <label id="number-label" required> Amžius: <input id="number" type="number" min="12" max="18" placeholder=" " required></label>
+    <label> Kas Jumis labiausiai sudomino apie "terra.incognitus" ? <select id="dropdown"></label>
+    <option value="">pasirinkite...</option>
+    <option value="0">imverycurly</option>
+    <option value="1">nuostabus organizatoriai</option>
+    <option value="2">sponkes</option>
+    </select>
+    <div class="rec">
+      <p>Ar rekomenduotumėt šį reivą savo draugams?</p> 
+    <label><input type="radio" value="0" name="rec"/> Bazaras</label>
+    <label><input type="radio" value="1" name="rec"/> Taip</label>
+    <label><input type="radio" value="2" name="rec"/> Ne</label>
+    <label><input type="radio" value="3" name="rec"/> Nežinau</label>
+  </div>
+    
+    <p>Kokias pareigas norėtumėte atlikti "terra.incognitus" ? (pasirinkite visus dominančius variantus)</p>
+    <label><input type="checkbox" value="checkbox"/> Stumdyti šponkes</label>
+    <label><input type="checkbox" value="1"/> Pardavinėti alkoholį nepilnamečiam</label>
+    <label><input type="checkbox" value="2"/> Grafinis dizainas</label>
+    <label><input type="checkbox" value="3"/> Apsauga nuo padirbtų pispasių </label>
+    <label><input type="checkbox" value="4"/> Saugoti rūbinę</label>
+  <label>Turite pasiūlymų arba norite užduoti mums klausimą?
+    <textarea name="klausimas" rows="3" cols="30" placeholder="Palikite savo komentarą čia..."></textarea>
+    <input id="submit" type="submit"/>
+    </fieldset>
+    </form>
+  </html>
