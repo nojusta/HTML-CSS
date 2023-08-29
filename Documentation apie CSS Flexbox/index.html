@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Flexbox</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>CSS Flexbox</header>
+      <ul>
+        <li>
+            <a class="nav-link" href="#Introduction">Introduction</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Flex_Container_Properties">Flex Container Properties</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Flex_Item_Properties">Flex Item Properties</a>
+        </li>
+        <li>
+            <a class="nav-link" href="#Flexbox_Layout_Examples">Flexbox Layout Examples</a>
+        </li>
+        <li><a class="nav-link" href="#Tips_and_Best_Practices">Tips and Best Practices</a></li>
+        <li>
+        <a class="nav-link" href="#Resources_and_Further_Reading">Resources and Further Reading</a>
+        </li>
+      </ul>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="Introduction">
+        <header>Introduction</header>
+        <p>Flexbox, short for CSS Flexible Box Layout, is a powerful CSS module introduced in CSS3. It simplifies the creation of flexible and responsive web layouts by providing an intuitive approach to aligning and distributing elements within a container.</p>
+        <p>Flexbox revolves around two key concepts: flex containers and flex items. A flex container establishes a flexible layout context, enabling its child elements (flex items) to adapt and fill the available space based on their properties. This flexibility makes it easy to create various layouts, accommodating different screen sizes and orientations.c</p>
+      </section>
+      <section class="main-section" id="Flex_Container_Properties">
+        <header>Flex Container Properties</header>
+        <p>Flex containers are the parent elements that establish a flex formatting context, allowing you to control the layout of flex items within them. The behavior of flex containers is determined by a set of properties specifically designed for Flexbox. Let's explore these properties:</p>
+        <ol>
+          <li><strong>'display'</strong>: The <strong>'display'</strong> property with a value of <strong>'flex'</strong> or <strong>'inline-flex'</strong> is used to turn an element into a flex container. By default, a flex container is block-level, taking up the entire width of its parent container.</li>
+          <li><strong>'flex-direction:'</strong> This property defines the direction of the main axis along which flex items are laid out. The main axis can be either horizontal (<strong>'row'</strong> or <strong>'row-reverse'</strong>) or vertical (<strong>'column'</strong> or <strong>'column-reverse'</strong>).</li>
+          <li><strong>'flex-wrap'</strong>: The <strong>'flex-wrap'</strong> property determines whether flex items should wrap to a new line when there is insufficient space within the flex container. Values include <strong>'nowrap'</strong> (default), <strong>'wrap'</strong>, and <strong>'wrap-reverse'</strong>.</li>
+          <li><strong>'justify-content'</strong>: This property controls how flex items are aligned along the main axis. It allows you to distribute extra space or adjust the position of items using values such as <strong>'flex-start', 'flex-end', 'center', 'space-between', 'space-around', and 'space-evenly'</strong>.</li>
+          <li><strong>'align-items'</strong>: The <strong>'align-items'</strong> property defines the alignment of flex items along the cross axis (perpendicular to the main axis). It can be set to <strong>'flex-start', 'flex-end', 'center', 'baseline'</strong>, or <strong>'stretch'</strong>.</li>
+          <li><strong>'align-content'</strong>: This property is similar to <strong>'align-items'</strong>, but it applies to the entire flex container when there is extra space in the cross axis. It controls the alignment and distribution of flex lines within the container.</li>
+        </ol>
+        <p>By utilizing these flex container properties, you can fine-tune the layout of your flex items. Experimenting with different combinations of these properties will enable you to achieve the desired visual arrangement and spacing within the flex container.</p>
+      </section>
+      <section class="main-section" id="Flex_Item_Properties">
+        <header>Flex Item Properties</header>
+        <p>Flex items are the child elements within a flex container. They are automatically adjusted and positioned within the container based on their properties. Let's explore the key properties that control the behavior of flex items:</p>
+        <ol>
+          <li><strong>'flex'</strong>: The <strong>'flex'</strong> property combines the three individual flex properties: <strong>'flex-grow'</strong>, <strong>'flex-shrink'</strong>, and <strong>'flex-basis'</strong>. It allows you to define how flex items should grow, shrink, and their initial size.</li>
+          <li><strong>'flex-grow'</strong>: This property determines the ability of a flex item to grow and occupy available space in the flex container. By assigning a value greater than <strong>'0'</strong>, you can specify the proportion of space the item should take up relative to other flex items.</li>
+          <li><strong>'flex-shrink'</strong>: The <strong>'flex-shrink'</strong> property controls the ability of a flex item to shrink if there is not enough space in the flex container. Assigning a value greater than <strong>'0'</strong> allows the item to shrink proportionally, based on its flex shrink factor.</li>
+          <li><strong>'flex-basis'</strong>: The <strong>'flex-basis'</strong> property specifies the initial size of a flex item before any remaining space is distributed. It can be set to a fixed length value or a keyword like <strong>'auto'</strong>, which means the item will size itself based on its content.</li>
+          <li><strong>'order'</strong>: The <strong>'order'</strong> property defines the order in which flex items are displayed within the flex container. By default, flex items have an order of <strong>'0'</strong>, but you can assign positive or negative integer values to reorder them.</li>
+          <li><strong>'align-self'</strong>: The <strong>'align-self'</strong> property overrides the <strong>'align-items'</strong> property for a specific flex item, allowing you to align it differently along the cross axis. It accepts the same values as <strong>'align-items'</strong> such as <strong>'flex-start', 'flex-end', 'center', 'baseline'</strong>, or <strong>'stretch'</strong>.</li>
+          <p>By utilizing these flex item properties, you can control the sizing, positioning, and order of individual flex items within the flex container. Combining these properties with the flex container properties allows you to create flexible and adaptive layouts tailored to your specific design requirements.</p>
+        </ol>
+      </section>
+      <section class="main-section" id="Flexbox_Layout_Examples">
+        <header>Flexbox Layout Examples</header>
+        <p>Flexbox offers a versatile layout system capable of creating various layouts. Let's explore some practical examples:</p>
+        <h3>Example 1: Navigation Bar</h3>
+        <p>Flexbox can be used to create responsive and flexible navigation bars. By setting the flex container properties appropriately, you can align the navigation items horizontally and ensure they adjust to different screen sizes.</p>
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-language">HTML</span>
+            <button class="code-copy-button">Copy</button>
+          </div>
+          <pre>
+            <code>
+  &lt;nav <span class="highlight">class</span>=<span class="highlight1">"nav-container"</span>&gt;
+    &lt;a <span class="highlight">href</span>=<span class="highlight1">"#"</span>>Home&lt;/a&gt;
+    &lt;a <span class="highlight">href</span>=<span class="highlight1">"#"</span>>About&lt;/a&gt;
+    &lt;a <span class="highlight">href</span>=<span class="highlight1">"#"</span>>Services&lt;/a&gt;
+    &lt;a <span class="highlight">href</span>=<span class="highlight1">"#"</span>>Contact&lt;/a&gt;
+  &lt;/nav&gt;
+            </code>
+          </pre>
+        </div>
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-language">CSS</span>
+            <button class="code-copy-button">Copy</button>
+          </div> 
+          <pre>
+            <code>
+  <span class="highlight">.nav-container </span>{
+    <span class="highlight1">display</span> flex;
+    <span class="highlight1">justify-content</span> space-between;
+    <span class="highlight1">align-items</span> center;
+  }
+            </code>
+          </pre>
+        </div>
+        <h3>Example 2: Flexible Sidebar Layout</h3>
+        <p>Flexbox can be used to create a flexible sidebar layout that adjusts to different screen sizes. By utilizing flex properties and media queries, you can achieve a responsive sidebar that collapses on smaller screens.</p>
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-language">HTML</span>
+            <button class="code-copy-button">Copy</button>
+          </div>
+          <pre>
+            <code>
+  &lt;div <span class="highlight">class</span>=<span class="highlight1">"container"</span>&gt;
+    &lt;div <span class="highlight">class</span>=<span class="highlight1">"sidebar"</span>&gtSidebar&lt;/div&gt;
+    &lt;div <span class="highlight">class</span>=<span class="highlight1">"main-content"</span>&gt;Main Content&lt;/div&gt;
+  &lt;/div&gt;
+            </code>
+          </pre>
+        </div>
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-language">CSS</span>
+            <button class="code-copy-button">Copy</button>
+          </div>
+          <pre>
+            <code>
+  <span class="highlight">.container </span>{
+    <span class="highlight1">display</span>: flex;
+  }
+
+  <span class="highlight">.sidebar</span> {
+    <span class="highlight1">flex</span>: <span class="highlight">0 0 250px</span>;
+    <span class="highlight1">background-color</span>: <span class="highlight">#f5f5f5</span>;
+    <span class="highlight1">padding</span>: <span class="highlight">20px</span>;
+  }
+
+  <span class="highlight">.main-content</span> {
+    <span class="highlight1">flex</span>: <span class="highlight">1</span>;
+    <span class="highlight1">padding</span>: <span class="highlight">20px</span>;
+  }
+            </code>
+          </pre>
+        </div>
+      </section>
+      <section class="main-section" id="Tips_and_Best_Practices">
+        <header>Tips and Best Practices</header>
+        <p>When working with Flexbox, it's helpful to keep a few tips and best practices in mind to ensure efficient and effective use of this layout system. Consider the following recommendations:</p>
+        <ul>
+          <li><strong>Start with a solid understanding of Flexbox:</strong> Before diving into complex layouts, take the time to grasp the fundamentals of Flexbox. Understand how flex containers and flex items interact and familiarize yourself with the various properties and their effects.</li>
+          <li><strong>Use semantic HTML:</strong> Employing semantic HTML elements enhances the accessibility and maintainability of your code. Combine Flexbox with appropriate HTML tags to create meaningful and well-structured layouts.</li>
+          <li><strong>Consider browser support:</strong> Flexbox enjoys broad browser support, but it's essential to be aware of any potential limitations or inconsistencies across different browsers and versions. Check the compatibility of Flexbox properties and test your layouts on multiple browsers to ensure a consistent experience.</li>
+          <li><strong>Keep layouts responsive:</strong> Flexbox excels at creating responsive layouts that adapt to different screen sizes. Utilize media queries and responsive design principles to adjust the flex container and flex item properties based on the available space and device characteristics.</li>
+          <li><strong>Avoid excessive nesting:</strong> While Flexbox allows for nested flex containers, excessive nesting can lead to complex and harder-to-maintain code. Try to keep your flexbox structures as flat as possible, using flex containers sparingly when necessary.</li>
+          <li><strong>Use flex shorthand:</strong> The flex shorthand property (<strong>'flex-grow', 'flex-shrink', 'flex-basis'</strong>) provides a concise way to set multiple flex properties at once. Utilize the shorthand syntax when appropriate to improve code readability.</li>
+          <li><strong>Combine Flexbox with other layout techniques:</strong> Flexbox is a powerful tool, but it's not the only layout option available. Consider combining it with other layout techniques like CSS Grid to leverage the strengths of both systems and create more complex and versatile layouts.</li>
+          <li><strong>Practice and experiment:</strong> Flexbox is a flexible layout system that encourages experimentation. Take the time to practice and experiment with different combinations of flex properties to understand their effects and discover new layout possibilities.</li>
+        </ul>
+      </section>
+      <section class="main-section" id="Resources_and_Further_Reading">
+        <header>Resources and Further Reading</header>
+        <p>If you want to further enhance your understanding and explore more advanced concepts, here are some recommended resources and articles:</p>
+        <ul>
+          <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS-Tricks Flexbox Guide</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">MDN Web Docs - Flexbox</a></li>
+          <li><a href="https://flexboxfroggy.com/">Flexbox Froggy</a></li>
+          <li><a href="https://www.freecodecamp.org/news/css-flexbox-by-example/">CSS Flexbox by Example</a></li>
+          <li><a href="https://bennettfeely.com/flexplorer/">Flexplorer</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
