@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter plot</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>  <!-- itraukia plotly framework'a -->
+    <style> /* sita kodo (CSS) dalis tik pakeicia isvaizda, jokiu skaiciavimu neatlieka */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    #container {
+        text-align: center;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        color: #323232;
+    }
+
+    label {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    input[type="number"] {
+        width: 50px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #plot {
+        width: 80%;
+        max-width: 800px;
+        margin-top: 20px;
+        padding-left: 21%;
+    }
+
+    #table {
+        width: 80%;
+        max-width: 800px;
+        margin-top: 20px;
+        overflow-x: auto;
+        padding-left: 21%;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    table th, table td {
+        padding: 8px 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .legenda {
+        margin-top: 20px;
+    }
+    .input {
+        text-align: center;
+        margin: 10px 0; 
+        padding: 5px;
+        margin-left: 20px;
+    }
+    .tarpas { 
+        padding-left: 25px;
+    }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h2>Scatter plot</h2>
+        <div class="input">
+            <label for="n">Įveskite n: </label>
+            <input type="number" id="n" min="1" value="10">
+            <label for="k" class="tarpas">Įveskite k: </label>
+            <input type="number" id="k" min="1" value="100">
+        </div>
+        <div class="input">
+            <label for="start">Įveskite pradžios indeksą: </label>
+            <input type="number" id="start" min="0">
+            <label for="end" class="tarpas">Įveskite pabaigos indeksą: </label>
+            <input type="number" id="end" min="0">
+        </div>
+        <button onclick="sugeneruoti()">Sugeneruoti</button> 
+        <div id="plot"></div> <!-- sukuria pagrindini scatter plot'a -->
+        <div id="table"></div> <!-- sukuria lentele -->
+        <div id="smallPlot"></div> <!-- sukuria antraji scatter plot'a -->
+    </div>
+
+    <script>
+    // Funkcija, kuri iskvieciama kai naudotojas paspaudzia "Sugeneruoti"
+        function sugeneruoti() {
+            // sukuriamos konstantos pagal vartotojo ivestus duomenis ir jos paverciamos i int duomenu tipa
+            const n = parseInt(document.getElementById('n').value);
+            const k = parseInt(document.getElementById('k').value);
+            const start = parseInt(document.getElementById('start').value);
+            const end = parseInt(document.getElementById('end').value);
+
+            
+            const array = []; // masyvas, kuriame laikomi sugeneruotos masyvo reiksmes
+            for (let i = 0; i < n; i++) { 
+                const randomSkaicius = Math.floor(Math.random() * k) + 1; // sugeneruoja atsitiktini skaiciu nuo 1 iki k
+                array.push(randomSkaicius); // atsitiktini skaiciu irasom i masyva
+            }
+
+            scatterPlot(array); // iskvieciama funkcija, kuri sugeneruoja pirmaji scatter plot'a
+
+            if (!isNaN(start) && !isNaN(end) && start < end && start >= 0 && end <= array.length) { // patikrina ar ivesti duomenys yra skaiciai, ir kad pradinis indeksas yra mazesnis uz galini
+                lentele(array, start, end); // sukuria lentele pagal pradini ir galini indeksa
+                mazesnisScatterPlot(array, start, end); // sukuria mazesni scatterplota su pradiniu ir galiniu indeksu
+            } else {
+                // pavaizduoja pilna lentele ir nesukuria mazesnio scatter plot'o , jeigu nera ivesti pradzios ir pabaigos masyvo indeksai
+                lentele(array, 0, array.length);
+            }
+        }
+        
+        // Funkcija, kuri sugeneruoja pirmaji scatter plot'a
+        function scatterPlot(array) {
+            // pagal html'e priskirta id gaunami duomenys ir irasomi i konstantas
+            const plotContainer = document.getElementById('plot');
+            const tableContainer = document.getElementById('table');
+
+            // isvalomas     scatter plotas ir lentele
+            plotContainer.innerHTML = '';
+            tableContainer.innerHTML = '';
+
+            // scatter plot'o nustatymai
+            const plotData = { 
+                x: Array.from(Array(array.length).keys()),
+                y: array,
+                mode: 'markers',
+                type: 'scatter',
+                marker: { size: 8 },
+                name: 'Masyvas A'
+            };
+            
+            const layout = {
+                xAsis: {
+                    title: 'Indeksai'
+                },
+                yAsis: {
+                    title: 'Reikšmės'
+                },
+            };
+
+            Plotly.newPlot('plot', [plotData], layout); // sukuria scatter plot'a
+        }
+
+        function lentele(array, start, end) { // funkcija, kuri sukuria lentele 
+            const tableContainer = document.getElementById('table');  // pagal html'e priskirta id gaunami duomenys ir irasomi i konstanta
+            tableContainer.innerHTML = ''; // isvaloma praeita lentele
+
+            // sukuriama lentele per html'a
+            const table = document.createElement('table');
+            table.innerHTML = '<tr><th>Indeksai</th><th>Reikšmės</th></tr>';
+
+            // i lentele isvedami masyvu indeksai/reiksmes su nustatytais pradzios ir pabaigos indeksais
+            for (let i = start; i < end; i++) { 
+                const row = table.insertRow();
+                row.insertCell(0).textContent = i;
+                row.insertCell(1).textContent = array[i];
+            }
+            tableContainer.appendChild(table); // pavaizduoja lentele
+        }
+
+        // Funkcija, kuri sugeneruoja mazesni scatter plot'a
+        function mazesnisScatterPlot(array, start, end) {
+            // pagal html'e priskirta id gaunami duomenys ir irasomi i konstanta
+            const smallPlotContainer = document.getElementById('smallPlot');
+            smallPlotContainer.innerHTML = ''; // isvalo praeita mazaji scatterplot'a
+
+            // mazesnio scatter plot'o nustatymai
+            const smallPlotData = {
+                x: Array.from(Array(end - start).keys()).map(i => i + start),
+                y: array.slice(start, end),
+                mode: 'markers',
+                type: 'scatter',
+                marker: { size: 8 },
+                name: 'Masyvas A'
+            };
+            const layout = {
+                xaxis: {
+                    title: 'Indeksai'
+                },
+                yaxis: {
+                    title: 'Reikšmės'
+                },
+            };
+
+            Plotly.newPlot('smallPlot', [smallPlotData], layout); // sukuria scatter plot'a (mazesni)
+        }
+
+        sugeneruoti(); // sugeneruoja scatterplot'a ir lentele
+    </script>
+</body>
+</html>
