@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaris - Retro Arcade Shooter for Android</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <style>
+      body {
+         margin: 0;
+         overflow: hidden;
+         font-family: 'Press Start 2P', sans-serif; 
+         background-color: #000;
+         color: #c8c8c8;
+      }
+
+      .main {
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         height: 1px;
+         width: 1px;
+         background-color: #fff;
+         border-radius: 50%;
+         box-shadow: -42vw -4vh 0px 0px #fff,25vw -41vh 0px 0px #fff,-20vw 49vh 0px 1px #fff,5vw 40vh 1px 1px #fff,29vw 19vh 1px 0px #fff,-44vw -13vh 0px 0px #fff,46vw 41vh 0px 1px #fff,-3vw -45vh 0px 1px #fff,47vw 35vh 1px 0px #fff,12vw -8vh 1px 0px #fff,-34vw 48vh 1px 1px #fff,32vw 26vh 1px 1px #fff,32vw -41vh 1px 1px #fff,0vw 37vh 1px 1px #fff,34vw -26vh 1px 0px #fff,-14vw -49vh 1px 0px #fff,-12vw 45vh 0px 1px #fff,-44vw -33vh 0px 1px #fff,-13vw 41vh 0px 0px #fff,-36vw -11vh 0px 1px #fff,-23vw -24vh 1px 0px #fff,-38vw -27vh 0px 1px #fff,16vw -19vh 0px 0px #fff,28vw 33vh 1px 0px #fff,-49vw -4vh 0px 0px #fff,16vw 32vh 0px 1px #fff,36vw -18vh 1px 0px #fff,-25vw -30vh 1px 0px #fff,-23vw 24vh 0px 1px #fff,-2vw -35vh 1px 1px #fff,-25vw 9vh 0px 0px #fff,-15vw -34vh 0px 0px #fff,-8vw -19vh 1px 0px #fff,-20vw -20vh 1px 1px #fff,42vw 50vh 0px 1px #fff,-32vw 10vh 1px 0px #fff,-23vw -17vh 0px 0px #fff,44vw 15vh 1px 0px #fff,-40vw 33vh 1px 1px #fff,-43vw 8vh 0px 0px #fff,-48vw -15vh 1px 1px #fff,-24vw 17vh 0px 0px #fff,-31vw 50vh 1px 0px #fff,36vw -38vh 0px 1px #fff,-7vw 48vh 0px 0px #fff,15vw -32vh 0px 0px #fff,29vw -41vh 0px 0px #fff,2vw 37vh 1px 0px #fff,7vw -40vh 1px 1px #fff,15vw 18vh 0px 0px #fff,25vw -13vh 1px 1px #fff,-46vw -12vh 1px 1px #fff,-18vw 22vh 0px 0px #fff,23vw -9vh 1px 0px #fff,50vw 12vh 0px 1px #fff,45vw 2vh 0px 0px #fff,14vw -48vh 1px 0px #fff,23vw 43vh 0px 1px #fff,-40vw 16vh 1px 1px #fff,20vw -31vh 0px 1px #fff,-17vw 44vh 1px 1px #fff,18vw -45vh 0px 0px #fff,33vw -6vh 0px 0px #fff,0vw 7vh 0px 1px #fff,-10vw -18vh 0px 1px #fff,-19vw 5vh 1px 0px #fff,1vw 42vh 0px 0px #fff,22vw 48vh 0px 1px #fff,39vw -8vh 1px 1px #fff,-6vw -42vh 1px 0px #fff,-47vw 34vh 0px 0px #fff,-46vw 19vh 0px 1px #fff,-12vw -32vh 0px 0px #fff,-45vw -38vh 0px 1px #fff,-28vw 18vh 1px 0px #fff,-38vw -46vh 1px 1px #fff,49vw -6vh 1px 1px #fff,-28vw 18vh 1px 1px #fff,10vw -24vh 0px 1px #fff,-5vw -11vh 1px 1px #fff,33vw -8vh 1px 0px #fff,-16vw 17vh 0px 0px #fff,18vw 27vh 0px 1px #fff,-8vw -10vh 1px 1px #fff;
+         box-shadow: 24vw 9vh 1px 0px #fff,12vw -24vh 0px 1px #fff,-45vw -22vh 0px 0px #fff,-37vw -40vh 0px 1px #fff,29vw 19vh 0px 1px #fff,4vw -8vh 0px 1px #fff,-5vw 21vh 1px 1px #fff,-27vw 26vh 1px 1px #fff,-47vw -3vh 1px 1px #fff,-28vw -30vh 0px 1px #fff,-43vw -27vh 0px 1px #fff,4vw 22vh 1px 1px #fff,36vw 23vh 0px 0px #fff,-21vw 24vh 1px 1px #fff,-16vw 2vh 1px 0px #fff,-16vw -6vh 0px 0px #fff,5vw 26vh 0px 0px #fff,-34vw 41vh 0px 0px #fff,1vw 42vh 1px 1px #fff,11vw -13vh 1px 1px #fff,48vw -8vh 1px 0px #fff,22vw -15vh 0px 0px #fff,45vw 49vh 0px 0px #fff,43vw -27vh 1px 1px #fff,20vw -2vh 0px 0px #fff,8vw 22vh 0px 1px #fff,39vw 48vh 1px 1px #fff,-21vw -11vh 0px 1px #fff,-40vw 45vh 0px 1px #fff,11vw -30vh 1px 0px #fff,26vw 30vh 1px 0px #fff,45vw -29vh 0px 1px #fff,-2vw 18vh 0px 0px #fff,-29vw -45vh 1px 0px #fff,-7vw -27vh 1px 1px #fff,42vw 24vh 0px 0px #fff,45vw -48vh 1px 0px #fff,-36vw -18vh 0px 0px #fff,-44vw 13vh 0px 1px #fff,36vw 16vh 0px 1px #fff,40vw 24vh 0px 0px #fff,18vw 11vh 0px 0px #fff,-15vw -23vh 1px 0px #fff,-24vw 48vh 0px 1px #fff,27vw -45vh 1px 0px #fff,-2vw -24vh 0px 1px #fff,-15vw -28vh 0px 0px #fff,-43vw 13vh 1px 0px #fff,7vw 27vh 1px 0px #fff,47vw 5vh 0px 0px #fff,-45vw 15vh 1px 1px #fff,-5vw -28vh 0px 1px #fff,38vw 25vh 1px 1px #fff,-39vw -1vh 1px 0px #fff,5vw 0vh 1px 0px #fff,49vw 13vh 0px 0px #fff,48vw 10vh 0px 1px #fff,19vw -28vh 0px 0px #fff,4vw 7vh 0px 0px #fff,21vw 21vh 1px 1px #fff,-15vw -15vh 0px 1px #fff,-6vw -42vh 1px 0px #fff,-15vw 48vh 1px 1px #fff,-23vw 25vh 1px 1px #fff,-48vw 25vh 0px 1px #fff,-31vw -19vh 0px 1px #fff,4vw 37vh 1px 1px #fff,-43vw 28vh 0px 0px #fff,3vw -25vh 0px 1px #fff,-39vw 14vh 0px 1px #fff,-40vw 31vh 0px 1px #fff,35vw -36vh 1px 1px #fff,16vw 49vh 0px 0px #fff,6vw 39vh 0px 0px #fff,3vw -35vh 0px 1px #fff,-44vw -2vh 1px 0px #fff,-6vw 21vh 1px 0px #fff,48vw 9vh 1px 1px #fff,-43vw 30vh 1px 1px #fff,29vw -12vh 1px 1px #fff,-48vw 13vh 1px 0px #fff,-42vw 32vh 1px 1px #fff,34vw 15vh 1px 1px #fff,29vw -37vh 1px 1px #fff,28vw 2vh 0px 0px #fff;
+         animation: zoom 16s alternate infinite; 
+      }
+
+      @keyframes zoom {
+         0%{
+            transform: scale(1);
+         }
+         100%{
+            transform: scale(1.5);
+         }
+      }
+
+      h2 {
+      margin: 0;
+      }
+
+      h2.hero {
+         font-family: 'Press Start 2P', sans-serif;
+      }
+
+      a {
+      color: #ccc;
+      }
+
+      section {
+      padding: 20px;
+      }
+
+      .hero {
+      font-size: clamp(40px, 10vw, 100px);
+      line-height: 1;
+      display: inline-block;
+      color: #fff;
+      z-index: 2;
+      letter-spacing: 10px;
+      filter: drop-shadow(0 1px 3px);
+      }
+
+      .demo {
+      height: 100px;
+      background: #fff;
+      }
+
+      .layers {
+      position: relative;
+      }
+
+      .layers::before,
+      .layers::after {
+      content: attr(data-text);
+      position: absolute;
+      width: 110%;
+      z-index: -1;
+      }
+
+      .layers::before {
+      top: 10px;
+      left: 15px;
+      color: #e0287d;
+      }
+
+      .layers::after {
+      top: 5px;
+      left: -10px;
+      color: #1bc7fb;
+      }
+
+      .single-path {
+      clip-path: polygon(
+         0% 12%,
+         53% 12%,
+         53% 26%,
+         25% 26%,
+         25% 86%,
+         31% 86%,
+         31% 0%,
+         53% 0%,
+         53% 84%,
+         92% 84%,
+         92% 82%,
+         70% 82%,
+         70% 29%,
+         78% 29%,
+         78% 65%,
+         69% 65%,
+         69% 66%,
+         77% 66%,
+         77% 45%,
+         85% 45%,
+         85% 26%,
+         97% 26%,
+         97% 28%,
+         84% 28%,
+         84% 34%,
+         54% 34%,
+         54% 89%,
+         30% 89%,
+         30% 58%,
+         83% 58%,
+         83% 5%,
+         68% 5%,
+         68% 36%,
+         62% 36%,
+         62% 1%,
+         12% 1%,
+         12% 34%,
+         60% 34%,
+         60% 57%,
+         98% 57%,
+         98% 83%,
+         1% 83%,
+         1% 53%,
+         91% 53%,
+         91% 84%,
+         8% 84%,
+         8% 83%,
+         4% 83%
+      );
+      }
+
+   .paths {
+   animation: paths 5s step-end infinite;
+   }
+
+   @keyframes paths {
+   0% {
+      clip-path: polygon(
+         0% 43%,
+         83% 43%,
+         83% 22%,
+         23% 22%,
+         23% 24%,
+         91% 24%,
+         91% 26%,
+         18% 26%,
+         18% 83%,
+         29% 83%,
+         29% 17%,
+         41% 17%,
+         41% 39%,
+         18% 39%,
+         18% 82%,
+         54% 82%,
+         54% 88%,
+         19% 88%,
+         19% 4%,
+         39% 4%,
+         39% 14%,
+         76% 14%,
+         76% 52%,
+         23% 52%,
+         23% 35%,
+         19% 35%,
+         19% 8%,
+         36% 8%,
+         36% 31%,
+         73% 31%,
+         73% 16%,
+         1% 16%,
+         1% 56%,
+         50% 56%,
+         50% 8%
+      );
+   }
+
+   5% {
+      clip-path: polygon(
+         0% 29%,
+         44% 29%,
+         44% 83%,
+         94% 83%,
+         94% 56%,
+         11% 56%,
+         11% 64%,
+         94% 64%,
+         94% 70%,
+         88% 70%,
+         88% 32%,
+         18% 32%,
+         18% 96%,
+         10% 96%,
+         10% 62%,
+         9% 62%,
+         9% 84%,
+         68% 84%,
+         68% 50%,
+         52% 50%,
+         52% 55%,
+         35% 55%,
+         35% 87%,
+         25% 87%,
+         25% 39%,
+         15% 39%,
+         15% 88%,
+         52% 88%
+      );
+   }
+
+   30% {
+      clip-path: polygon(
+         0% 53%,
+         93% 53%,
+         93% 62%,
+         68% 62%,
+         68% 37%,
+         97% 37%,
+         97% 89%,
+         13% 89%,
+         13% 45%,
+         51% 45%,
+         51% 88%,
+         17% 88%,
+         17% 54%,
+         81% 54%,
+         81% 75%,
+         79% 75%,
+         79% 76%,
+         38% 76%,
+         38% 28%,
+         61% 28%,
+         61% 12%,
+         55% 12%,
+         55% 62%,
+         68% 62%,
+         68% 51%,
+         0% 51%,
+         0% 92%,
+         63% 92%,
+         63% 4%,
+         65% 4%
+      );
+   }
+
+   45% {
+      clip-path: polygon(
+         0% 33%,
+         2% 33%,
+         2% 69%,
+         58% 69%,
+         58% 94%,
+         55% 94%,
+         55% 25%,
+         33% 25%,
+         33% 85%,
+         16% 85%,
+         16% 19%,
+         5% 19%,
+         5% 20%,
+         79% 20%,
+         79% 96%,
+         93% 96%,
+         93% 50%,
+         5% 50%,
+         5% 74%,
+         55% 74%,
+         55% 57%,
+         96% 57%,
+         96% 59%,
+         87% 59%,
+         87% 65%,
+         82% 65%,
+         82% 39%,
+         63% 39%,
+         63% 92%,
+         4% 92%,
+         4% 36%,
+         24% 36%,
+         24% 70%,
+         1% 70%,
+         1% 43%,
+         15% 43%,
+         15% 28%,
+         23% 28%,
+         23% 71%,
+         90% 71%,
+         90% 86%,
+         97% 86%,
+         97% 1%,
+         60% 1%,
+         60% 67%,
+         71% 67%,
+         71% 91%,
+         17% 91%,
+         17% 14%,
+         39% 14%,
+         39% 30%,
+         58% 30%,
+         58% 11%,
+         52% 11%,
+         52% 83%,
+         68% 83%
+      );
+   }
+
+   76% {
+      clip-path: polygon(
+         0% 26%,
+         15% 26%,
+         15% 73%,
+         72% 73%,
+         72% 70%,
+         77% 70%,
+         77% 75%,
+         8% 75%,
+         8% 42%,
+         4% 42%,
+         4% 61%,
+         17% 61%,
+         17% 12%,
+         26% 12%,
+         26% 63%,
+         73% 63%,
+         73% 43%,
+         90% 43%,
+         90% 67%,
+         50% 67%,
+         50% 41%,
+         42% 41%,
+         42% 46%,
+         50% 46%,
+         50% 84%,
+         96% 84%,
+         96% 78%,
+         49% 78%,
+         49% 25%,
+         63% 25%,
+         63% 14%
+      );
+   }
+
+   90% {
+      clip-path: polygon(
+         0% 41%,
+         13% 41%,
+         13% 6%,
+         87% 6%,
+         87% 93%,
+         10% 93%,
+         10% 13%,
+         89% 13%,
+         89% 6%,
+         3% 6%,
+         3% 8%,
+         16% 8%,
+         16% 79%,
+         0% 79%,
+         0% 99%,
+         92% 99%,
+         92% 90%,
+         5% 90%,
+         5% 60%,
+         0% 60%,
+         0% 48%,
+         89% 48%,
+         89% 13%,
+         80% 13%,
+         80% 43%,
+         95% 43%,
+         95% 19%,
+         80% 19%,
+         80% 85%,
+         38% 85%,
+         38% 62%
+      );
+   }
+
+   1%,
+   7%,
+   33%,
+   47%,
+   78%,
+   93% {
+      clip-path: none;
+   }
+   }
+
+   .movement {
+   position: relative;
+   animation: movement 8s step-end infinite;
+   }
+
+   @keyframes movement {
+   0% {
+      top: 0px;
+      left: -20px;
+   }
+
+   15% {
+      top: 10px;
+      left: 10px;
+   }
+
+   60% {
+      top: 5px;
+      left: -10px;
+   }
+
+   75% {
+      top: -5px;
+      left: 20px;
+   }
+
+   100% {
+      top: 10px;
+      left: 5px;
+   }
+   }
+
+   .opacity {
+   animation: opacity 5s step-end infinite;
+   }
+
+   @keyframes opacity {
+   0% {
+      opacity: 0.1;
+   }
+
+   5% {
+      opacity: 0.7;
+   }
+
+   30% {
+      opacity: 0.4;
+   }
+
+   45% {
+      opacity: 0.6;
+   }
+
+   76% {
+      opacity: 0.4;
+   }
+
+   90% {
+      opacity: 0.8;
+   }
+
+   1%,
+   7%,
+   33%,
+   47%,
+   78%,
+   93% {
+      opacity: 0;
+   }
+   }
+
+   .font {
+   animation: font 7s step-end infinite;
+   }
+
+   @keyframes font {
+   0% {
+      font-weight: 100;
+      color: #e0287d;
+      filter: blur(3px);
+   }
+
+   20% {
+      font-weight: 500;
+      color: #fff;
+      filter: blur(0);
+   }
+
+   50% {
+      font-weight: 300;
+      color: #1bc7fb;
+      filter: blur(2px);
+   }
+
+   60% {
+      font-weight: 700;
+      color: #fff;
+      filter: blur(0);
+   }
+
+   90% {
+      font-weight: 500;
+      color: #e0287d;
+      filter: blur(6px);
+   }
+   }
+
+   .glitch span {
+   animation: paths 5s step-end infinite;
+   }
+
+   .glitch::before {
+   animation: paths 5s step-end infinite, opacity 5s step-end infinite,
+      font 8s step-end infinite, movement 10s step-end infinite;
+   }
+
+   .glitch::after {
+   animation: paths 5s step-end infinite, opacity 5s step-end infinite,
+      font 7s step-end infinite, movement 8s step-end infinite;
+   }
+
+   .hero-container {
+   position: relative;
+   padding: 200px 0;
+   text-align: center;
+   }
+
+   #subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      animation: lights 5s 750ms linear infinite;
+      margin: 50px;
+   }
+
+   @keyframes lights {
+      0% {
+         color: hsl(230, 60%, 95%);
+         text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.2),
+               0 0 0.125em hsla(320, 100%, 60%, 0.3),
+               -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+               1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+      }
+
+      30% {
+         color: hsl(230, 90%, 98%);
+         text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.5),
+               0 0 0.125em hsla(320, 100%, 60%, 0.5),
+               -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+               0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+      }
+
+      40% {
+         color: hsl(230, 100%, 99%);
+         text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.5),
+               0 0 0.125em hsla(320, 100%, 90%, 0.5),
+               -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
+               0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
+      }
+
+      70% {
+         color: hsl(230, 90%, 98%);
+         text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.5),
+               0 0 0.125em hsla(320, 100%, 60%, 0.5),
+               0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+               -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+      }
+
+      100% {
+         color: hsl(230, 60%, 95%);
+         text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.2),
+               0 0 0.125em hsla(320, 100%, 60%, 0.3),
+               1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+               -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+      }
+   }   
+
+   #spaceship {
+      position: absolute;
+      width: 50px; /* Adjust the size of the spaceship */
+      height: 50px; /* Adjust the size of the spaceship */
+      top: 50%; /* Adjust the starting position */
+      left: 50%; /* Adjust the starting position */
+      transform: translate(-50%, -50%);
+   }
+
+   @keyframes gradientAnimation {
+      0% {
+            background-position: 0% 50%;
+      }
+      50% {
+            background-position: 100% 50%;
+      }
+      100% {
+            background-position: 0% 50%;
+      }
+   }
+   /* space ship animacijos */
+   .space-ship {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -999;
+   }
+
+   .space-ship > * {
+      animation: fly 50s linear infinite;
+      top: 0;
+      left: 0;
+      position: fixed;
+      z-index: -999;
+      pointer-events: none;
+   }
+   .space-ship img {
+      width: 50px; /* Adjust the width as needed */
+      height: auto; /* Maintain aspect ratio */
+   }
+
+   @keyframes fly {
+      0% {
+         transform: translate(-200%, 110vh) rotateZ(0deg) scale(1); opacity: 1;
+      }
+
+      12.5% {
+         transform: translate(120vw, -120%) rotateZ(20deg) scale(1.75);
+      }
+
+      25% {
+         transform: translate(-200%, 50vh) scale(1.75) rotateZ(-20deg);
+      }
+
+      37.5% {
+         transform: translate(-200%, -120%) rotateZ(-40deg); opacity: .5;
+      }
+
+      50% {
+         transform: translate(100vw, 50vh) rotateZ(0deg) scale(1);
+      }
+
+      62.5% {
+         transform: translate(20vw, 100vh) rotateZ(20deg) scale(1.75);
+      }
+
+      75% {
+         transform: translate(200%, 100vh) rotateZ(20deg); opacity: .25;
+      }
+
+      87.5% {
+         transform: translate(50vw, -200%) scale(1.75) rotateZ(20deg);
+      }
+
+      100% {
+         transform: translate(-200%, 110vh) rotateZ(0deg) scale(1); opacity: 1;
+      }
+   }
+
+   .space-ship1 > * {
+      animation: fly1 40s linear infinite;
+      top: 0;
+      left: 0;
+      position: fixed;
+      z-index: -999;
+      pointer-events: none;
+   }
+
+   .space-ship1 img {
+      width: 50px;
+      height: auto;
+   }
+
+   @keyframes fly1 {
+      0% {
+         transform: translate(-200%, 110vh) rotateZ(0deg) scale(0.8);
+         opacity: 1;
+      }
+
+      20% {
+         transform: translate(50vw, 80vh) rotateZ(40deg) scale(0.8);
+      }
+
+      40% {
+         transform: translate(-100%, 30vh) scale(1.5) rotateZ(-30deg) scale(0.8);
+      }
+
+      60% {
+         transform: translate(150vw, -50vh) rotateZ(-20deg); opacity: .5;
+      }
+
+      80% {
+         transform: translate(-30vw, 120vh) rotateZ(60deg) scale(0.8);
+      }
+
+      100% {
+         transform: translate(100vw, 50vh) rotateZ(0deg) scale(0.8);
+      }
+   }
+
+   /* download mygtukas cia */
+   #download {
+      text-align: center;
+         margin-top: 20px;
+   }
+
+   button.download-btn {
+   font-family: 'Press Start 2P', sans-serif; 
+   display: block;
+   position: relative;
+   background: #b4a6d1;
+   border: none;
+   outline: none;
+   cursor: pointer;
+   margin-top: 10px;
+   padding: 20px 80px;
+   font-size: .75em;
+   letter-spacing: .35em;
+   text-align: center;
+   text-transform: uppercase;
+   border: 1px solid hsla(0, 0%, 100%, .2);
+   transition: all .2s ease;
+   margin: 0 auto;
+   margin-top: 20px;
+   text-shadow:
+      -1px -1px 0 #fff,  
+       1px -1px 0 #fff,
+      -1px  1px 0 #fff,
+       1px  1px 0 #fff;
+
+      &:before, 
+      &:after {
+         content: 'DOWNLOAD GAME';  
+         position: absolute;
+         top: 0;
+         left: 0;
+         padding: 8px 0;
+         width: 100%;
+         -webkit-clip: rect(0px, 0px, 0px, 0px);
+         clip: rect(0px, 0px, 0px, 0px);
+         background: #e2e0e0;
+         color: #000;
+      }
+      
+      &:before {
+         left: -3px;
+         top: -2px;
+         text-shadow: 2px 0 #e2e0e0;
+         box-shadow: 2px 0 #e2e0e0;
+      }
+
+      &:after {
+         left: 2px;
+         bottom: -2px;
+         text-shadow: -1px 0 #e2e0e0;
+         box-shadow: -1px 0 #e2e0e0;
+      }
+
+      &:hover {
+         background: #e2e0e0;
+         color: black;
+      }
+
+      &:hover:before {
+         animation: glitch-test 1.5s infinite linear alternate-reverse;
+      }
+      
+      &:hover:after {
+         animation: glitch-test 2s infinite linear alternate;
+      }
+   }
+   @keyframes glitch-test {
+      0% {
+         clip: rect(-3px, 600px, 0px, 0px);
+      }
+      5.88235% {
+         clip: rect(0px, 600px, 0px, 0px);
+      }
+      11.76471% {
+         clip: rect(-3px, 600px, 0px, 0px);
+      }
+      17.64706% {
+         clip: rect(-3px, 600px, 0px, 0px);
+      }
+      23.52941% {
+         clip: rect(100px, 600px, 100px, 0px);
+      }
+      29.41176% {
+         clip: rect(0px, 600px, 600px, 0px);
+      }
+      35.29412% {
+         clip: rect(100px, 600px, 0px, 0px);
+      }
+      41.17647% {
+         clip: rect(0px, 600px, 600px, 0px);
+      }
+      47.05882% {
+         clip: rect(100px, 600px, 0px, 0px);
+      }
+      52.94118% {
+         clip: rect(-3px, 600px, 0px, 0px);
+      }
+      58.82353% {
+         clip: rect(100px, 450px,100px, 0px);
+      }
+      64.70588% {
+         clip: rect(0px, 450px, 0px, 0px);
+      }
+      70.58824% {
+         clip: rect(100px, 450px, 100px, 0px);
+      }
+      76.47059% {
+         clip: rect(0px, 450px, 0px, 0px);
+      }
+      82.35294% {
+         clip: rect(0px, 450px, 0px, 0px);
+      }
+      88.23529% {
+         clip: rect(0px, 450px, 0px, 0px);
+      }
+      94.11765% {
+         clip: rect(0px, 450px, 0px, 0px);
+      }
+      100% {
+         clip: rect(0px, 450px, 0px, 0px);
+      }
+   }
+   /* responsive design */
+   @media screen and (max-width: 768px) {
+      .hero {
+         font-size: 24px;
+      }
+
+      #subtitle {
+         font-size: 16px;
+      }
+
+      .space-ship {
+         width: 30px;
+         height: 30px;
+      }
+
+      .space-ship img {
+         width: 30px;
+      }
+   }
+   @media screen and (max-width: 600px) {
+      button.download-btn {
+         padding: 16px 40px;
+         font-size: 14px;
+      }
+   }
+
+   @media screen and (max-width: 400px) {
+      button.download-btn {
+         padding: 12px 24px;
+         font-size: 12px;
+      }
+   }
+    </style>
+</head>
+<body>
+   <div class="main"></div>
+      <div id="header">
+         <div class="hero-container">
+            <h2 class="hero glitch layers" data-text="Galaris"><span>Galaris</span></h2>
+            <div id="subtitle">Retro Arcade Shooter for Android</div>
+            <div id="download">
+               <button class="download-btn" data-text="DOWNLOAD GAME" onclick="downloadApk()">Download Game</button>
+           </div>
+         </div>
+      <div id="spaceship-animation" class="space-ship">
+         <img src="https://cdn.discordapp.com/attachments/1155573057323286581/1166479717218648064/MainPLayerV2_scaled_10x_pngcrushed.png?ex=658202e4&is=656f8de4&hm=9885ffdbf9754b82162baa36889e954e299931af406c8ab6ab51747dfcb1486a&" alt="Spaceship">
+      </div>
+      <div id="spaceship-animation" class="space-ship1">
+         <img src="https://cdn.discordapp.com/attachments/1155573057323286581/1166479717218648064/MainPLayerV2_scaled_10x_pngcrushed.png?ex=658202e4&is=656f8de4&hm=9885ffdbf9754b82162baa36889e954e299931af406c8ab6ab51747dfcb1486a&" alt="Spaceship">
+      </div>
+      </div>
+   </div>
+</body>
+    <script>
+      const starsContainer = document.getElementById('stars-container');
+      const numberOfStars = 30;
+
+      for (let i = 0; i < numberOfStars; i++) {
+         const star = document.createElement('div');
+         star.className = 'star';
+         star.style.top = `${Math.random() * 100}vh`;
+         star.style.left = `${Math.random() * 100}vw`;
+         starsContainer.appendChild(star);
+      }
+
+      function showHideSpaceship(btnSpaceship) {
+         var spaceshipStyle = document.getElementById("spaceship-animation");
+         if (btnSpaceship.value == "Hide Spaceship") {
+            spaceshipStyle.style.display = "none";
+            btnSpaceship.value = "Show Spaceship";
+         } else {
+            spaceshipStyle.style.display = "block";
+            btnSpaceship.value = "Hide Spaceship";
+         }
+      }
+
+      function downloadApk() {
+         const apkUrl = 'https://storage.googleapis.com/galaris/Galaris.apk';
+         const link = document.createElement('a');
+         link.style.display = 'none';
+         document.body.appendChild(link);
+         link.href = apkUrl;
+         link.download = 'Galaris.apk';
+         link.click();
+         document.body.removeChild(link);
+      }
+    </script>
+</html>
+;
