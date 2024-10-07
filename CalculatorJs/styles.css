@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f9f9f9;
+    opacity: 1;
+    background-image: linear-gradient(30deg, #d5d5d5 12%, transparent 12.5%, transparent 87%, #d5d5d5 87.5%, #d5d5d5), 
+                      linear-gradient(150deg, #d5d5d5 12%, transparent 12.5%, transparent 87%, #d5d5d5 87.5%, #d5d5d5), 
+                      linear-gradient(30deg, #d5d5d5 12%, transparent 12.5%, transparent 87%, #d5d5d5 87.5%, #d5d5d5), 
+                      linear-gradient(150deg, #d5d5d5 12%, transparent 12.5%, transparent 87%, #d5d5d5 87.5%, #d5d5d5), 
+                      linear-gradient(60deg, #d5d5d577 25%, transparent 25.5%, transparent 75%, #d5d5d577 75%, #d5d5d577), 
+                      linear-gradient(60deg, #d5d5d577 25%, transparent 25.5%, transparent 75%, #d5d5d577 75%, #d5d5d577);
+    background-size: 52px 91px;
+    background-position: 0 0, 0 0, 26px 46px, 26px 46px, 0 0, 26px 46px;
+}
+
+.calculator {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+}
+
+.display {
+    background-color: #333;
+    color: #fff;
+    font-size: 2em;
+    padding: 20px;
+    text-align: right;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+}
+
+.btn {
+    background-color: #ccc;
+    border: none;
+    font-size: 1.5em;
+    padding: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #bbb;
+}
+
+.btn:active, .btn.active {
+    background-color: #aaa;
+}
