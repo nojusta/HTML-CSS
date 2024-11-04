@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kliento Duomenų Anketa</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+    <div class="form-container">
+        <form action="#" class="form">
+            <h2 class="text-center">Kliento Duomenų Anketa</h2>
+            
+            <div class="progressbar">
+                <div class="progress" id="progress"></div>
+                <div class="progress-step progress-step-active" data-title="Pagrindinė"></div>
+                <div class="progress-step" data-title="Kontaktai"></div>
+                <div class="progress-step" data-title="Socialinė"></div>
+                <div class="progress-step" data-title="Profesinė"></div>
+            </div>
+
+            <div class="form-step form-step-active">
+                <div class="input-group">
+                    <label for="gender">Lytis <span class="required">*</span></label>
+                    <select name="gender" id="gender" required>
+                        <option value="vyras">Vyras</option>
+                        <option value="moteris">Moteris</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="firstName">Vardas <span class="required">*</span></label>
+                    <input type="text" name="firstName" id="firstName" required />
+                </div>
+                <div class="input-group">
+                    <label for="middleName">Antrasis Vardas</label>
+                    <input type="text" name="middleName" id="middleName" />
+                </div>
+                <div class="input-group">
+                    <label for="lastName">Pavardė <span class="required">*</span></label>
+                    <input type="text" name="lastName" id="lastName" required />
+                </div>
+                <div class="input-group">
+                    <label for="dob">Gimimo Data <span class="required">*</span></label>
+                    <input type="date" name="dob" id="dob" required />
+                </div>
+                <div class="input-group">
+                    <label for="personalCode">Asmens Kodas <span class="required">*</span></label>
+                    <input type="text" name="personalCode" id="personalCode" required maxlength="11" />
+                </div>
+                <div class="">
+                    <a href="#" class="btn btn-next width-50 ml-auto">Kitas</a>
+                </div>
+            </div>
+
+            <div class="form-step">
+                <div class="input-group">
+                    <label for="phone">Telefono Numeris <span class="required">*</span></label>
+                    <input type="number" name="phone" id="phone" required />
+                </div>
+                <div class="input-group">
+                    <label for="email">El. Pašto Adresas <span class="required">*</span></label>
+                    <input type="email" name="email" id="email" required />
+                </div>
+                <div class="input-group">
+                    <label for="address">Gyvenamoji Vieta <span class="required">*</span></label>
+                    <input name="address" id="address" required />
+                </div>
+                <div class="btns-group">
+                    <a href="#" class="btn btn-prev">Atgal</a>
+                    <a href="#" class="btn btn-next">Kitas</a>
+                </div>
+            </div>
+
+            <div class="form-step">
+                <div class="input-group">
+                    <label for="maritalStatus">Vedybinė Padėtis <span class="required">*</span></label>
+                    <select name="maritalStatus" id="maritalStatus" required>
+                        <option value="nevedęs/netekėjusi">Nevedęs/Netekėjusi</option>
+                        <option value="vedęs/ištekėjusi">Vedęs/Ištekėjusi</option>
+                        <option value="išsiskyręs(-usi)">Išsiskyręs(-usi)</option>
+                    </select>
+                </div>
+                <div class="input-group" id="spouseNameGroup">
+                    <label for="spouseName">Sutuoktinis(-ė) Vardas</label>
+                    <input type="text" name="spouseName" id="spouseName" />
+                </div>
+                <div class="input-group" id="spouseLastNameGroup">
+                    <label for="spouseLastName">Sutuoktinis(-ė) Pavardė</label>
+                    <input type="text" name="spouseLastName" id="spouseLastName" />
+                </div>
+                <div class="btns-group">
+                    <a href="#" class="btn btn-prev">Atgal</a>
+                    <a href="#" class="btn btn-next">Kitas</a>
+                </div>
+            </div>
+
+            <div class="form-step">
+                <div class="input-group">
+                    <label for="employmentStatus">Profesinė Padėtis <span class="required">*</span></label>
+                    <select name="employmentStatus" id="employmentStatus" required>
+                        <option value="studijuoja">Studijuoja</option>
+                        <option value="dirba">Dirba</option>
+                        <option value="nedirba">Nedirba</option>
+                        <option value="motinystės/tėvystės atostogose">Motinystės/Tėvystės Atostogose</option>
+                    </select>
+                </div>
+                <div class="input-group" id="workplaceGroup">
+                    <label for="workplace">Darbo Įstaiga</label>
+                    <input type="text" name="workplace" id="workplace" />
+                </div>
+                <div class="input-group" id="positionGroup">
+                    <label for="position">Pareigos</label>
+                    <input type="text" name="position" id="position" />
+                </div>
+                <div class="input-group" id="unemploymentReasonGroup">
+                    <label for="unemploymentReason">Nedarbo Priežastis</label>
+                    <input type="text" name="unemploymentReason" id="unemploymentReason" />
+                </div>
+                <div class="input-group" id="leaveEndGroup">
+                    <label for="leaveEnd">Atostogų Pabaiga</label>
+                    <input type="date" name="leaveEnd" id="leaveEnd" />
+                </div>
+                <div class="input-group">
+                    <label for="education">Išsilavinimas <span class="required">*</span></label>
+                    <select name="education" id="education" required>
+                        <option value="pagrindinis">Pagrindinis</option>
+                        <option value="vidurinis">Vidurinis</option>
+                        <option value="profesinis">Profesinis</option>
+                        <option value="aukštasis-kolegijinis">Aukštasis-kolegijinis</option>
+                        <option value="aukštasis-universitetinis">Aukštasis-universitetinis</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="lastSchool">Paskutinė Baigta Mokykla</label>
+                    <input type="text" name="lastSchool" id="lastSchool" />
+                </div>
+                <div class="input-group">
+                    <label for="graduationYear">Baigimo Metai</label>
+                    <input type="number" name="graduationYear" id="graduationYear" />
+                </div>
+                <div class="input-group">
+                    <label for="qualification">Kvalifikacija</label>
+                    <input type="text" name="qualification" id="qualification" />
+                </div>
+                <div class="input-group">
+                    <label for="degree">Mokslo Laipsnis</label>
+                    <input type="text" name="degree" id="degree" />
+                </div>
+                <div class="input-group">
+                    <label for="workExperience">Darbo Patirtis (metai)</label>
+                    <input type="number" name="workExperience" id="workExperience" />
+                </div>
+                <div class="input-group">
+                    <label for="workField">Darbo Sritis <span class="required">*</span></label>
+                    <select name="workField" id="workField" required>
+                        <option value="teisė">Teisė</option>
+                        <option value="viešasis sektorius">Viešasis Sektorius</option>
+                        <option value="sveikatos apsauga">Sveikatos Apsauga</option>
+                        <option value="farmacija">Farmacija</option>
+                        <option value="pramonė / gamyba">Pramonė / Gamyba</option>
+                        <option value="IT">IT</option>
+                        <option value="prekyba">Prekyba</option>
+                        <option value="krašto apsauga">Krašto Apsauga</option>
+                        <option value="vidaus reikalų sistema">Vidaus Reikalų Sistema</option>
+                        <option value="klientų aptarnavimas ir paslaugos">Klientų Aptarnavimas ir Paslaugos</option>
+                        <option value="transportas">Transportas</option>
+                        <option value="kultūra ir pramogos">Kultūra ir Pramogos</option>
+                        <option value="švietimas / studijos">Švietimas / Studijos</option>
+                    </select>
+                </div>
+                <div class="btns-group">
+                    <a href="#" class="btn btn-prev">Atgal</a>
+                    <input type="submit" value="Registruotis" class="btn" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
