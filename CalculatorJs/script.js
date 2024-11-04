@@ -10,6 +10,7 @@ function clearDisplay() {
     previousOperand = '';
     operation = undefined;
     updateDisplay();
+    enableButtons();
 }
 
 function appendNumber(number) {
@@ -19,7 +20,11 @@ function appendNumber(number) {
 }
 
 function chooseOperation(op) {
-    if (currentOperand === '') return;
+    if (currentOperand === '' && previousOperand === '') return;
+    if (currentOperand === '' && previousOperand !== '') {
+        operation = op;
+        return;
+    }
     if (previousOperand !== '') {
         calculate();
     }
@@ -53,6 +58,23 @@ function calculate() {
     operation = undefined;
     previousOperand = '';
     updateDisplay();
+    if (result === 'Error') {
+        disableButtons();
+    }
+}
+
+function disableButtons() {
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        if (button.getAttribute('data-key') !== 'Escape') {
+            button.disabled = true;
+        }
+    });
+}
+
+function enableButtons() {
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => button.disabled = false);
 }
 
 function updateDisplay() {
@@ -67,7 +89,7 @@ function square() {
 
 function power() {
     if (currentOperand === '') return;
-    let exponent = prompt('Įveskite n:');
+    let exponent = prompt('Iveskite n:');
     currentOperand = Math.pow(parseFloat(currentOperand), parseFloat(exponent));
     updateDisplay();
 }
@@ -92,6 +114,18 @@ function factorial() {
         result *= i;
     }
     currentOperand = result;
+    updateDisplay();
+}
+
+function percentage() {
+    if (currentOperand === '') return;
+    currentOperand = parseFloat(currentOperand) / 100;
+    updateDisplay();
+}
+
+function negate() {
+    if (currentOperand === '') return;
+    currentOperand = parseFloat(currentOperand) * -1;
     updateDisplay();
 }
 

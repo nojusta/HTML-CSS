@@ -10,27 +10,35 @@
     <div class="calculator">
         <div class="display" id="display">0</div>
         <div class="buttons">
-            <button class="btn" data-key="7" onclick="appendNumber(7)">7</button>
-            <button class="btn" data-key="8" onclick="appendNumber(8)">8</button>
-            <button class="btn" data-key="9" onclick="appendNumber(9)">9</button>
-            <button class="btn" data-key="/" onclick="chooseOperation('/')">/</button>
-            <button class="btn" data-key="4" onclick="appendNumber(4)">4</button>
-            <button class="btn" data-key="5" onclick="appendNumber(5)">5</button>
-            <button class="btn" data-key="6" onclick="appendNumber(6)">6</button>
-            <button class="btn" data-key="*" onclick="chooseOperation('*')">*</button>
-            <button class="btn" data-key="1" onclick="appendNumber(1)">1</button>
-            <button class="btn" data-key="2" onclick="appendNumber(2)">2</button>
-            <button class="btn" data-key="3" onclick="appendNumber(3)">3</button>
-            <button class="btn" data-key="-" onclick="chooseOperation('-')">-</button>
-            <button class="btn" data-key="0" onclick="appendNumber(0)">0</button>
-            <button class="btn" data-key="+" onclick="appendNumber('+')">+</button>
-            <button class="btn" data-key="=" onclick="calculate()">=</button>
-            <button class="btn" data-key="Escape" onclick="clearDisplay()">C</button>
-            <button class="btn" onclick="square()">x²</button>
-            <button class="btn" onclick="power()">xⁿ</button>
-            <button class="btn" onclick="sqrt()">√</button>
-            <button class="btn" onclick="cuberoot()">∛</button>
-            <button class="btn" onclick="factorial()">!</button>
+            <button class="btn function-btn" data-key="Escape" onclick="clearDisplay()">C</button>
+            <button class="btn function-btn" onclick="negate()">±</button>
+            <button class="btn function-btn" onclick="percentage()">%</button>
+            <button class="btn operator-btn" data-key="/" onclick="chooseOperation('/')">/</button>
+
+            <button class="btn number-btn" data-key="7" onclick="appendNumber(7)">7</button>
+            <button class="btn number-btn" data-key="8" onclick="appendNumber(8)">8</button>
+            <button class="btn number-btn" data-key="9" onclick="appendNumber(9)">9</button>
+            <button class="btn operator-btn" data-key="*" onclick="chooseOperation('*')">*</button>
+
+            <button class="btn number-btn" data-key="4" onclick="appendNumber(4)">4</button>
+            <button class="btn number-btn" data-key="5" onclick="appendNumber(5)">5</button>
+            <button class="btn number-btn" data-key="6" onclick="appendNumber(6)">6</button>
+            <button class="btn operator-btn" data-key="-" onclick="chooseOperation('-')">-</button>
+
+            <button class="btn number-btn" data-key="1" onclick="appendNumber(1)">1</button>
+            <button class="btn number-btn" data-key="2" onclick="appendNumber(2)">2</button>
+            <button class="btn number-btn" data-key="3" onclick="appendNumber(3)">3</button>
+            <button class="btn operator-btn" data-key="+" onclick="chooseOperation('+')">+</button>
+
+            <button class="btn number-btn" data-key="0" onclick="appendNumber(0)">0</button>
+            <button class="btn number-btn" data-key="." onclick="appendNumber('.')">.</button>
+            <button class="btn equal-btn" data-key="=" onclick="calculate()">=</button>
+
+            <button class="btn function-btn" onclick="square()">x²</button>
+            <button class="btn function-btn" onclick="power()">xⁿ</button>
+            <button class="btn function-btn" onclick="sqrt()">√</button>
+            <button class="btn function-btn" onclick="cuberoot()">∛</button>
+            <button class="btn function-btn" onclick="factorial()">!</button>
         </div>
     </div>
     <script src="script.js"></script>

@@ -15,6 +15,7 @@ body {
                       linear-gradient(60deg, #d5d5d577 25%, transparent 25.5%, transparent 75%, #d5d5d577 75%, #d5d5d577);
     background-size: 52px 91px;
     background-position: 0 0, 0 0, 26px 46px, 26px 46px, 0 0, 26px 46px;
+    overflow: hidden; 
 }
 
 .calculator {
@@ -22,7 +23,8 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 300px;
+    width: 90%;
+    max-width: 300px;
 }
 
 .display {
@@ -31,6 +33,10 @@ body {
     font-size: 2em;
     padding: 20px;
     text-align: right;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 60px; 
 }
 
 .buttons {
@@ -40,12 +46,30 @@ body {
 }
 
 .btn {
-    background-color: #ccc;
     border: none;
     font-size: 1.5em;
     padding: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.number-btn {
+    background-color: #e0e0e0;
+}
+
+.operator-btn {
+    background-color: #dfbd87;
+    color: white;
+}
+
+.equal-btn {
+    background-color: #df8d87;
+    color: white;
+}
+
+.function-btn {
+    background-color: #64b5f6;
+    color: white;
 }
 
 .btn:hover {
@@ -54,4 +78,65 @@ body {
 
 .btn:active, .btn.active {
     background-color: #aaa;
+}
+
+@media (max-width: 600px) {
+    .calculator {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .display {
+        font-size: 1.5em;
+        padding: 15px;
+        height: 60px; 
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+    }
+
+    .btn {
+        font-size: 1.2em;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 600px) and (orientation: landscape) {
+    body {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .calculator {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .display {
+        font-size: 1.5em;
+        padding: 15px;
+        height: 60px; 
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+    }
+
+    .btn {
+        font-size: 1.2em;
+        padding: 15px;
+    }
 }
