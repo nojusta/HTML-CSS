@@ -16,23 +16,33 @@
             <button id="start-button">Pradėti žaidimą</button>
             <p id="error-message" class="error-message hidden">Prašome įvesti savo vardą</p>
         </div>
-        <div class="game-board hidden" id="game-board"></div>
         <div class="score-board hidden">
             <p id="player">Žaidėjas: <span id="player-name-display"></span></p>
             <p id="score">Taškai: 0</p>
             <p id="time">Laikas: 0s</p>
         </div>
-        <div class="history-board hidden">
+        <div class="game-board hidden" id="game-board"></div>
+        <button id="history-button" class="history-button hidden">
+            <img src="assets/history.png" alt="History" class="history-icon">
+        </button>
+    </div>
+    
+    <div class="popup hidden" id="history-popup">
+        <div class="popup-content">
             <h2>Žaidimo istorija</h2>
             <ul id="history-list"></ul>
+            <button id="close-history-button">Uždaryti</button>
         </div>
     </div>
+    
     <div class="popup hidden" id="popup">
         <div class="popup-content">
+            <button id="close-replay-button" class="close-button">×</button>
             <p>Žaidimas baigtas, ar norite bandyti vėl?</p>
             <button id="replay-button">Bandykite vėl</button>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

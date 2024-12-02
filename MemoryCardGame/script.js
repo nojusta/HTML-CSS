@@ -1,7 +1,9 @@
 document.getElementById('start-button').addEventListener('click', startGame);
 document.getElementById('replay-button').addEventListener('click', replayGame);
+document.getElementById('history-button').addEventListener('click', showHistory);
+document.getElementById('close-history-button').addEventListener('click', closeHistory);
+document.getElementById('close-replay-button').addEventListener('click', closeReplay);
 document.addEventListener('DOMContentLoaded', () => {
-    // Display the controls
     const controls = document.querySelector('.controls');
     controls.classList.add('visible');
 });
@@ -24,28 +26,64 @@ function startGame() {
     }
 
     errorMessage.classList.add('hidden');
-    sessionStorage.setItem('playerName', playerName);
+    try {
+        sessionStorage.setItem('playerName', playerName);
+    } catch (e) {
+        console.error('Failed to save player name to sessionStorage', e);
+    }
     score = 0;
     matchedPairs = 0;
     flippedCards = [];
+
+    // Hide header elements
+    document.querySelector('h1').classList.add('hidden');
+    document.querySelector('h3').classList.add('hidden');
 
     document.querySelector('.controls').classList.add('hidden');
     document.getElementById('score').textContent = `Taškai: ${score}`;
     document.getElementById('player-name-display').textContent = playerName;
 
-    // Show game elements
-    document.querySelector('.score-board').classList.remove('hidden');
-    document.querySelector('.history-board').classList.remove('hidden');
-    document.getElementById('game-board').classList.remove('hidden');
+    const scoreBoard = document.querySelector('.score-board');
+    const historyButton = document.getElementById('history-button');
+    const gameBoard = document.getElementById('game-board');
+
+    scoreBoard.classList.remove('hidden');
+    historyButton.classList.remove('hidden');
+    gameBoard.classList.remove('hidden');
 
     requestAnimationFrame(() => {
-        document.querySelector('.score-board').classList.add('visible');
-        document.querySelector('.history-board').classList.add('visible');
-        document.getElementById('game-board').classList.add('visible');
+        scoreBoard.classList.add('visible', 'fade-in-up');
+        historyButton.classList.add('visible', 'fade-in-up');
+        gameBoard.classList.add('visible'); 
     });
 
     initializeBoard();
     startTimer();
+}
+
+function showHistory() {
+    const historyPopup = document.getElementById('history-popup');
+    historyPopup.classList.remove('hidden');
+    requestAnimationFrame(() => {
+        historyPopup.classList.add('visible');
+    });
+    displayGameHistory();
+}
+
+function closeHistory() {
+    const historyPopup = document.getElementById('history-popup');
+    historyPopup.classList.remove('visible');
+    setTimeout(() => {
+        historyPopup.classList.add('hidden');
+    }, 300);
+}
+
+function closeReplay() {
+    const popup = document.getElementById('popup');
+    popup.classList.remove('visible');
+    setTimeout(() => {
+        popup.classList.add('hidden');
+    }, 300);
 }
 
 function initializeBoard() {
@@ -133,25 +171,30 @@ function endGame() {
     clearInterval(timer);
     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
     const playerName = sessionStorage.getItem('playerName');
-    const historyList = document.getElementById('history-list');
-    const listItem = document.createElement('li');
-    listItem.textContent = `${playerName} - Taškai: ${score}, Laikas: ${elapsedTime}s`;
-    historyList.appendChild(listItem);
     saveGameSession(playerName, score, elapsedTime);
-    
+
     const popup = document.getElementById('popup');
     popup.classList.remove('hidden');
     requestAnimationFrame(() => {
-        popup.style.opacity = '1';
+        popup.classList.add('visible');
     });
 }
 
 function saveGameSession(playerName, score, time) {
     const gameSession = { playerName, score, time };
-    let gameHistory = JSON.parse(sessionStorage.getItem('gameHistory')) || [];
+    let gameHistory = [];
+    try {
+        gameHistory = JSON.parse(sessionStorage.getItem('gameHistory')) || [];
+    } catch (e) {
+        console.error('Failed to retrieve game history from sessionStorage', e);
+    }
     gameHistory.push(gameSession);
     gameHistory.sort((a, b) => b.score - a.score || a.time - b.time);
-    sessionStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+    try {
+        sessionStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+    } catch (e) {
+        console.error('Failed to save game history to sessionStorage', e);
+    }
     displayGameHistory();
 }
 
@@ -159,17 +202,26 @@ function displayGameHistory() {
     const historyList = document.getElementById('history-list');
     historyList.innerHTML = '';
     const gameHistory = JSON.parse(sessionStorage.getItem('gameHistory')) || [];
-    gameHistory.forEach(session => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${session.playerName} - Taškai: ${session.score}, Laikas: ${session.time}s`;
-        historyList.appendChild(listItem);
-    });
+    
+    if (gameHistory.length === 0) {
+        const noHistoryMessage = document.createElement('li');
+        noHistoryMessage.textContent = 'Nėra žaidimo istorijos';
+        historyList.appendChild(noHistoryMessage);
+    } else {
+        gameHistory.forEach(session => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${session.playerName} - Taškai: ${session.score}, Laikas: ${session.time}s`;
+            historyList.appendChild(listItem);
+        });
+    }
 }
 
 function replayGame() {
     const popup = document.getElementById('popup');
-    popup.classList.add('hidden');
-    popup.style.opacity = '0';
+    popup.classList.remove('visible');
+    setTimeout(() => {
+        popup.classList.add('hidden');
+    }, 300);
 
     score = 0;
     matchedPairs = 0;

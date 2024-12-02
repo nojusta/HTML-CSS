@@ -7,7 +7,6 @@ body {
     margin: 0;
     background-color: #f0f0f0;
     transition: background-color 0.5s;
-    
 }
 
 .subtitle {
@@ -20,6 +19,7 @@ body {
     width: 90%;
     max-width: 600px;
     transition: opacity 0.5s;
+    position: relative; 
 }
 
 .game-board {
@@ -143,18 +143,29 @@ body {
     background-color: #1b88b6;
 }
 
-.controls, .score-board, .history-board {
-    margin-top: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+.score-board {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    text-align: left;
+}
+
+.score-board p {
+    margin: 5px 0;
 }
 
 .visible {
     opacity: 1 !important;
     visibility: visible !important;
+    transform: translateY(0);
+    /* Removed animation property */
 }
 
+.fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Error message styling */
 .error-message {
     color: red;
     margin-top: 10px;
@@ -175,50 +186,150 @@ body {
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    visibility: hidden; 
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.popup.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .popup-content {
+    position: relative; 
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    max-width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    transform: translateY(-20px);
+    transition: transform 0.5s ease;
 }
 
-#replay-button {
+.popup.visible .popup-content {
+    transform: translateY(0);
+}
+
+#replay-button, #close-history-button {
     background-color: #21a5de;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
-#replay-button:hover {
+#replay-button:hover, #close-history-button:hover {
     background-color: #1b88b6;
 }
 
-.sidebar {
+.history-button {
     position: fixed;
-    right: 0;
-    top: 0;
-    width: 300px;
-    height: 100%;
-    background: #fff;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    overflow-y: auto;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
 }
 
-.sidebar h2 {
-    margin-top: 0;
+.history-icon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s;
 }
 
-.sidebar ul {
-    list-style: none;
+.history-button:hover .history-icon {
+    transform: scale(1.1);
+}
+
+#history-popup ul {
+    list-style-type: none;
     padding: 0;
+    margin: 0; 
 }
 
-.sidebar li {
+#history-popup li {
     margin-bottom: 10px;
+    padding-left: 0; 
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #333;
+    padding: 0; 
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .score-board,
+    .history-button {
+        position: static;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .score-board,
+    .history-button {
+        width: 100%;
+    }
+
+    .score-board {
+        margin-top: 20px;
+    }
+
+    .history-button {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .score-board p {
+        font-size: 0.9em;
+    }
+
+    .history-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .popup-content {
+        padding: 15px;
+    }
+
+    #replay-button,
+    #close-history-button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+
+    .close-button {
+        font-size: 1.2em;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
