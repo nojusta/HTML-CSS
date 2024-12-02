@@ -1,0 +1,224 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    transition: background-color 0.5s;
+    
+}
+
+.subtitle {
+    margin-top: 10px;
+    color: #333;
+}
+
+.game-container {
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    transition: opacity 0.5s;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Card container */
+.card {
+    width: 100%;
+    height: 100px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+/* Inner card to hold front and back */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+/* Flip the inner card */
+.card.flip .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front and Back Faces */
+.card .front, .card .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+}
+
+/* Front Face */
+.card .front {
+    border-radius: 10px;
+    
+    --sz: 20px;
+    --c0: #ffffff00;
+    --c1: #bdd0e1;
+    --c2: #809bb9;
+    --c3: #3e394a;
+    --ts: 50%/ calc(var(--sz) * 13.25) calc(var(--sz) * 11.7);
+
+    background:
+        repeating-conic-gradient(#3b354730 0.000001%, var(--c0) 0.00005%, var(--c0) 0.00035%, var(--c0) 0.00005%) var(--ts),
+        repeating-conic-gradient(#35638b59 0.00002%, var(--c0) 0.00008%, var(--c0) 0.0008%, var(--c0) 0.00008%) var(--ts),
+        repeating-linear-gradient(90deg, var(--c0) 0 24.33%, var(--c3) 0 25%) var(--ts),
+        linear-gradient(210deg, var(--c0) 0 80%, var(--c3) calc(80% + 1px) 80.5%, var(--c0) calc(80.5% + 1px) 100%) var(--ts),
+        conic-gradient(from -90deg at 49.75% 100%, var(--c1) 0 30deg, var(--c0) 0 150deg, var(--c2) 0 60deg) var(--ts),
+        conic-gradient(from -180deg at 24.5% 50.5%, var(--c1) 0 119deg, var(--c0) 0 100%) var(--ts),
+        conic-gradient(from 120deg at 74.5% 50%, var(--c3) 0 120deg, var(--c0) 0 100%) var(--ts),
+        conic-gradient(from 180deg at 49.5% 34%, var(--c2) 0 60deg, var(--c0) 0 100%) var(--ts),
+        conic-gradient(from -120deg at 50% 34%, var(--c3) 0 60deg, var(--c0) 0 100%) var(--ts),
+        conic-gradient(from 0deg at 74.5% 17.5%, var(--c2) 0 60deg, var(--c3) 0 121deg, var(--c0) 0 100%) var(--ts),
+        linear-gradient(150deg, var(--c0) 0 40%, var(--c3) calc(40% + 1px) 40.5%, var(--c0) calc(40.5% + 1px) 100%) var(--ts),
+        linear-gradient(90deg, var(--c0) 0 50%, var(--c2) 0 75%, var(--c0) 0 100%) var(--ts),
+        repeating-linear-gradient(90deg, var(--c1) 0 24.33%, var(--c3) 0 25%) var(--ts);
+
+    background-size: cover;
+    background-position: center;
+}
+
+/* Back Face */
+.card .back {
+    transform: rotateY(180deg);
+    background-color: #fff;
+}
+
+/* Image on Back Face */
+.card .back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Controls container */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Input and button styles */
+.controls input[type="text"],
+.controls button {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+.controls input[type="text"] {
+    border: 1px solid #ccc;
+}
+
+#start-button {
+    background-color: #21a5de;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#start-button:hover {
+    background-color: #1b88b6;
+}
+
+.controls, .score-board, .history-board {
+    margin-top: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#replay-button {
+    background-color: #21a5de;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#replay-button:hover {
+    background-color: #1b88b6;
+}
+
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
