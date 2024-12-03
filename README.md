@@ -13,5 +13,6 @@ This repository is a collection of mini-projects created to learn and demonstrat
 7. **JavaScript Calculator**: A functional calculator built using JavaScript to understand DOM manipulation and event handling.
 8. **Video Game Webpage**: A webpage for a video game featuring space-themed CSS animations and integration with Google Cloud API for file hosting.
 9. **JavaScript Libraries Experiments**: Projects experimenting with different JavaScript libraries to extend functionality and learn their use cases.
+10. **Memory Card Game**: A memory card game built using HTML, CSS, and JavaScript to enhance understanding of DOM manipulation, event handling, and game logic.
 
 Each project in this repository represents a step forward in my journey to learning and improving my web development skills.
