@@ -1,8 +1,10 @@
 document.getElementById('start-button').addEventListener('click', startGame);
 document.getElementById('replay-button').addEventListener('click', replayGame);
+document.getElementById('replay-button-popup').addEventListener('click', replayGame);
 document.getElementById('history-button').addEventListener('click', showHistory);
 document.getElementById('close-history-button').addEventListener('click', closeHistory);
 document.getElementById('close-replay-button').addEventListener('click', closeReplay);
+document.getElementById('back-button').addEventListener('click', backToNameEntry);
 document.addEventListener('DOMContentLoaded', () => {
     const controls = document.querySelector('.controls');
     controls.classList.add('visible');
@@ -29,13 +31,12 @@ function startGame() {
     try {
         sessionStorage.setItem('playerName', playerName);
     } catch (e) {
-        console.error('Failed to save player name to sessionStorage', e);
+        console.error('Nepavyko įrašyti žaidėjo vardo į sesiją', e);
     }
     score = 0;
     matchedPairs = 0;
     flippedCards = [];
 
-    // Hide header elements
     document.querySelector('h1').classList.add('hidden');
     document.querySelector('h3').classList.add('hidden');
 
@@ -46,15 +47,18 @@ function startGame() {
     const scoreBoard = document.querySelector('.score-board');
     const historyButton = document.getElementById('history-button');
     const gameBoard = document.getElementById('game-board');
+    const buttonContainer = document.querySelector('.button-container');
 
     scoreBoard.classList.remove('hidden');
     historyButton.classList.remove('hidden');
     gameBoard.classList.remove('hidden');
+    buttonContainer.classList.remove('hidden');
 
     requestAnimationFrame(() => {
         scoreBoard.classList.add('visible', 'fade-in-up');
         historyButton.classList.add('visible', 'fade-in-up');
         gameBoard.classList.add('visible'); 
+        buttonContainer.classList.add('visible', 'fade-in-up');
     });
 
     initializeBoard();
@@ -84,6 +88,19 @@ function closeReplay() {
     setTimeout(() => {
         popup.classList.add('hidden');
     }, 300);
+}
+
+function backToNameEntry() {
+    clearInterval(timer);
+
+    document.querySelector('h1').classList.remove('hidden');
+    document.querySelector('h3').classList.remove('hidden');
+
+    document.querySelector('.controls').classList.remove('hidden');
+    document.querySelector('.score-board').classList.add('hidden');
+    document.getElementById('history-button').classList.add('hidden');
+    document.getElementById('game-board').classList.add('hidden');
+    document.querySelector('.button-container').classList.add('hidden');
 }
 
 function initializeBoard() {
@@ -186,14 +203,14 @@ function saveGameSession(playerName, score, time) {
     try {
         gameHistory = JSON.parse(sessionStorage.getItem('gameHistory')) || [];
     } catch (e) {
-        console.error('Failed to retrieve game history from sessionStorage', e);
+        console.error('Nepavyko gauti žaidimo istorijos iš sessionStorage', e);
     }
     gameHistory.push(gameSession);
     gameHistory.sort((a, b) => b.score - a.score || a.time - b.time);
     try {
         sessionStorage.setItem('gameHistory', JSON.stringify(gameHistory));
     } catch (e) {
-        console.error('Failed to save game history to sessionStorage', e);
+        console.error('Nepavyko įrašyti žaidimo istorijos į sessionStorage', e);
     }
     displayGameHistory();
 }

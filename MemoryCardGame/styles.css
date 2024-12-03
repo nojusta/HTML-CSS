@@ -333,3 +333,24 @@ body {
         transform: translateY(0);
     }
 }
+
+.replay-button, .back-button {
+    background-color: #21a5de;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px 5px; 
+    border-radius: 5px;
+}
+
+.replay-button:hover, .back-button:hover {
+    background-color: #1b88b6;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
