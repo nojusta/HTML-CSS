@@ -16,11 +16,13 @@ let matchedPairs = 0;
 let score = 0;
 let timer;
 let startTime;
+let cardsToMatch = 2; // Numatytoji reikšmė
 
 function startGame() {
     const playerNameInput = document.getElementById('player-name');
     const playerName = playerNameInput.value.trim();
     const errorMessage = document.getElementById('error-message');
+    const difficultyLevel = document.getElementById('difficulty-level').value;
 
     if (!playerName) {
         errorMessage.classList.remove('hidden');
@@ -28,6 +30,20 @@ function startGame() {
     }
 
     errorMessage.classList.add('hidden');
+
+    switch (difficultyLevel) {
+        case 'easy':
+            cardsToMatch = 2;
+            break;
+        case 'medium':
+            cardsToMatch = 3;
+            break;
+        case 'hard':
+            cardsToMatch = 4;
+            break;
+        default:
+            cardsToMatch = 2;
+    }
     try {
         sessionStorage.setItem('playerName', playerName);
     } catch (e) {
@@ -108,6 +124,14 @@ function initializeBoard() {
     gameBoard.innerHTML = '';
     cards = generateCards();
     shuffle(cards);
+
+    // Apskaičiuojame stulpelių skaičių
+    const totalCards = cards.length;
+    const columns = Math.ceil(Math.sqrt(totalCards));
+
+    // Nustatome tinklelio stulpelių skaičių
+    gameBoard.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+
     cards.forEach(card => {
         const cardElement = createCardElement(card);
         gameBoard.appendChild(cardElement);
@@ -116,12 +140,21 @@ function initializeBoard() {
 
 function generateCards() {
     const images = [
-        'assets/img1.png', 'assets/img2.png', 'assets/img3.png', 'assets/img4.png', 
-        'assets/img5.png', 'assets/img6.png', 'assets/img7.png', 'assets/img8.png', 
+        'assets/img1.png', 'assets/img2.png', 'assets/img3.png', 'assets/img4.png',
+        'assets/img5.png', 'assets/img6.png', 'assets/img7.png', 'assets/img8.png',
         'assets/img9.png', 'assets/img10.png'
     ];
-    const cards = images.concat(images); 
-    return cards.map((image) => ({ image }));
+
+    const selectedImages = images; // Naudojame tuos pačius paveikslėlius
+
+    const cards = [];
+    selectedImages.forEach(image => {
+        for (let i = 0; i < cardsToMatch; i++) {
+            cards.push({ image });
+        }
+    });
+
+    return cards;
 }
 
 function shuffle(array) {
@@ -148,28 +181,31 @@ function createCardElement(card) {
 }
 
 function flipCard(cardElement) {
-    if (flippedCards.length < 2 && !cardElement.classList.contains('flip')) {
+    if (flippedCards.length < cardsToMatch && !cardElement.classList.contains('flip')) {
         cardElement.classList.add('flip');
         flippedCards.push(cardElement);
-        if (flippedCards.length === 2) {
+        if (flippedCards.length === cardsToMatch) {
             setTimeout(checkForMatch, 500);
         }
     }
 }
 
 function checkForMatch() {
-    const [card1, card2] = flippedCards;
-    if (card1.dataset.image === card2.dataset.image) {
+    const firstCardImage = flippedCards[0].dataset.image;
+    const isMatch = flippedCards.every(card => card.dataset.image === firstCardImage);
+
+    if (isMatch) {
         matchedPairs++;
         score += 10;
         flippedCards = [];
-        if (matchedPairs === cards.length / 2) {
+
+        const totalMatchesRequired = cards.length / cardsToMatch;
+        if (matchedPairs === totalMatchesRequired) {
             endGame();
         }
     } else {
         setTimeout(() => {
-            card1.classList.remove('flip');
-            card2.classList.remove('flip');
+            flippedCards.forEach(card => card.classList.remove('flip'));
             flippedCards = [];
         }, 1000);
     }
@@ -245,6 +281,22 @@ function replayGame() {
     flippedCards = [];
     document.getElementById('score').textContent = `Taškai: ${score}`;
     document.getElementById('time').textContent = `Laikas: 0s`;
+
+    const difficultyLevel = document.getElementById('difficulty-level').value;
+
+    switch (difficultyLevel) {
+        case 'easy':
+            cardsToMatch = 2;
+            break;
+        case 'medium':
+            cardsToMatch = 3;
+            break;
+        case 'hard':
+            cardsToMatch = 4;
+            break;
+        default:
+            cardsToMatch = 2;
+    }
 
     initializeBoard();
     startTimer();

@@ -1,9 +1,5 @@
 body {
     font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
     transition: background-color 0.5s;
@@ -19,40 +15,42 @@ body {
     width: 90%;
     max-width: 600px;
     transition: opacity 0.5s;
+    margin: 20px auto;
     position: relative; 
 }
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: 10px;
     justify-content: center;
     margin-top: 20px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Card container */
 .card {
     width: 100%;
-    height: 100px;
+    padding-top: 100%;
+    position: relative;
     perspective: 1000px;
     cursor: pointer;
 }
 
-/* Inner card to hold front and back */
 .card-inner {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     transition: transform 0.6s;
     transform-style: preserve-3d;
 }
 
-/* Flip the inner card */
 .card.flip .card-inner {
     transform: rotateY(180deg);
 }
 
-/* Front and Back Faces */
 .card .front, .card .back {
     position: absolute;
     width: 100%;
@@ -64,7 +62,6 @@ body {
     left: 0;
 }
 
-/* Front Face */
 .card .front {
     border-radius: 10px;
     
@@ -94,13 +91,11 @@ body {
     background-position: center;
 }
 
-/* Back Face */
 .card .back {
     transform: rotateY(180deg);
     background-color: #fff;
 }
 
-/* Image on Back Face */
 .card .back img {
     width: 100%;
     height: 100%;
@@ -108,16 +103,16 @@ body {
     border-radius: 10px;
 }
 
-/* Controls container */
 .controls {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }
 
-/* Input and button styles */
 .controls input[type="text"],
-.controls button {
+.controls button,
+.controls select {
     width: 100%;
     max-width: 300px;
     padding: 10px 20px;
@@ -144,10 +139,8 @@ body {
 }
 
 .score-board {
-    position: fixed;
-    top: 10px;
-    left: 10px;
     text-align: left;
+    margin: 10px 0;
 }
 
 .score-board p {
@@ -158,14 +151,12 @@ body {
     opacity: 1 !important;
     visibility: visible !important;
     transform: translateY(0);
-    /* Removed animation property */
 }
 
 .fade-in-up {
     animation: fadeInUp 0.5s ease forwards;
 }
 
-/* Error message styling */
 .error-message {
     color: red;
     margin-top: 10px;
@@ -228,13 +219,7 @@ body {
 }
 
 .history-button {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 10;
+    margin: 10px 0;
 }
 
 .history-icon {
@@ -322,7 +307,6 @@ body {
     }
 }
 
-/* Animation Keyframes */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -334,7 +318,7 @@ body {
     }
 }
 
-.replay-button, .back-button {
+.replay-button, .back-button, #replay-button-popup {
     background-color: #21a5de;
     color: white;
     border: none;
@@ -353,4 +337,15 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+
+.controls select {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
 }
